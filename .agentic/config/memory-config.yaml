@@ -1,0 +1,75 @@
+# Spec-Kit Memory System Configuration
+
+database:
+  # Path to SQLite database (relative to git root)
+  path: .agentic/memory/memory.db
+
+  # Backup settings
+  backup:
+    # Enable automatic backups
+    enabled: true
+    # Backup directory (relative to git root)
+    directory: .agentic/memory/backups
+    # Keep last N backups
+    retention: 10
+    # Backup schedule (cron format, if using automated backups)
+    # schedule: "0 2 * * *"  # Daily at 2 AM
+
+search:
+  # Default result limit for searches
+  default_limit: 10
+
+  # Maximum results to return
+  max_limit: 50
+
+extraction:
+  # Automatically capture artifacts during spec-kit commands
+  auto_capture: true
+
+  # Artifact types to auto-capture
+  artifact_types:
+    - spec
+    - plan
+    - tasks
+    - research
+    - data-model
+    - contracts
+    - checklist
+
+  # Extract decisions from these artifact types
+  extract_decisions:
+    - plan
+    - research
+
+  # Extract tasks from these artifact types
+  extract_tasks:
+    - tasks
+
+memory_injection:
+  # Token budget for memory retrieval (per command)
+  token_budgets:
+    specify: 2500    # 2-3K tokens for similar features
+    plan: 6000       # 5-7K tokens for decisions + patterns
+    tasks: 4000      # 3-5K tokens for task patterns
+    implement: 3000  # 2-4K tokens for reflections
+
+  # Number of results to inject
+  result_limits:
+    similar_features: 3
+    decisions: 8
+    patterns: 5
+    reflections: 5
+
+patterns:
+  # Minimum times_used to recommend a pattern
+  min_usage_threshold: 2
+
+  # Minimum success_rate to recommend a pattern
+  min_success_rate: 0.7
+
+logging:
+  # Enable verbose logging
+  verbose: false
+
+  # Log file path (relative to git root)
+  # log_file: .agentic/memory/memory.log
