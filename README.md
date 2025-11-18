@@ -34,6 +34,26 @@ The Spec-Kit Memory System automatically learns from your development process by
 
 **Read the [ROADMAP.md](ROADMAP.md) for integration options** - from manual usage to full automation.
 
+## 📚 Documentation Quick Reference
+
+- **[QUICKSTART.md](QUICKSTART.md)** - Get started in 5 minutes
+- **[ROADMAP.md](ROADMAP.md)** - Integration levels and timeline
+- **[INTEGRATION_GUIDE.md](INTEGRATION_GUIDE.md)** - Complete integration instructions
+- **[IMPLEMENTATION_SUMMARY.md](IMPLEMENTATION_SUMMARY.md)** - Technical overview
+
+### Integration Materials
+
+- **`.agentic/integrations/hooks/`** - Ready-to-copy hook code for spec-kit commands
+  - `post-specify-hook.sh` - Auto-capture after `/speckit.specify`
+  - `post-plan-hook.sh` - Auto-capture after `/speckit.plan`
+  - `post-tasks-hook.sh` - Auto-capture after `/speckit.tasks`
+  - `pre-plan-context-injection.sh` - Inject memory context before planning
+
+- **`.agentic/integrations/slash-commands/`** - Slash command definitions
+  - `memory.recall.md` - Search memory (`/memory.recall`)
+  - `memory.reflect.md` - Add reflections (`/memory.reflect`)
+  - `memory.status.md` - View statistics (`/memory.status`)
+
 ## Features
 
 ### Automatic Capture
