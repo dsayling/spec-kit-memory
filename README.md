@@ -12,6 +12,28 @@ The Spec-Kit Memory System automatically learns from your development process by
 - 📊 **Analyzing** patterns across features to improve consistency
 - 🚀 **Accelerating** development by reusing proven solutions
 
+## 🎯 Zero Disruption Philosophy
+
+**The memory system is a passive add-on that doesn't change your spec-kit workflow.**
+
+- ✅ **No spec-kit modifications required** - Works alongside your existing commands
+- ✅ **Optional usage** - Capture only when you want to
+- ✅ **Manual or automatic** - You control the integration level
+- ✅ **Standalone tool** - Works independently, integrates when you're ready
+
+**Your existing workflow stays exactly the same:**
+```bash
+# Your normal spec-kit workflow (unchanged)
+/speckit.specify "Feature X"
+/speckit.plan
+/speckit.tasks
+
+# NEW: Optionally capture to memory (when you want)
+.agentic/scripts/bash/memory-capture.sh --feature-dir specs/... --type spec --file spec.md
+```
+
+**Read the [ROADMAP.md](ROADMAP.md) for integration options** - from manual usage to full automation.
+
 ## Features
 
 ### Automatic Capture
@@ -138,13 +160,11 @@ python3 .agentic/scripts/memory-cli.py export --all --format markdown > memory-d
   --file specs/003-feature-name/spec.md
 ```
 
-## Automatic Capture
+## Artifact Capture Workflow
 
-The memory system can automatically capture artifacts during spec-kit workflows:
+### Current: Manual Capture (Recommended)
 
-### Manual Capture After Creating Artifacts
-
-After running spec-kit commands, capture the artifacts:
+After running spec-kit commands, manually capture the artifacts:
 
 ```bash
 # After /speckit.specify
@@ -180,6 +200,63 @@ Example for `/speckit.specify`:
   --type spec \
   --file "$SPEC_FILE"
 ```
+
+## 🗺️ Integration Roadmap
+
+The memory system supports **multiple integration levels** - use as much or as little as you want:
+
+### Level 0: Standalone Tool (Current - Zero Integration)
+Use memory-cli.py as a standalone search tool. No spec-kit integration at all.
+
+**Effort**: None
+**Value**: Manual knowledge capture and search
+
+### Level 1: Manual Capture (Recommended Starting Point)
+After each spec-kit command, manually run capture scripts.
+
+**Effort**: 30 seconds per artifact
+**Value**: Searchable knowledge base builds over time
+
+### Level 2: Automatic Capture (Optional Hooks)
+Add capture hooks to the end of your spec-kit commands for automatic capture.
+
+**Effort**: 5 minutes per command to add hooks
+**Value**: Zero-effort knowledge capture
+
+### Level 3: Context Injection (Advanced)
+Query memory before planning to inject relevant past decisions into agent context.
+
+**Effort**: 10-15 minutes per command to add queries
+**Value**: Informed planning with architectural consistency
+
+### Level 4: Full Learning System (Future)
+Automatic pattern detection and recommendations.
+
+**Effort**: Minimal (mostly automatic)
+**Value**: Compound learning across all features
+
+**📖 See [ROADMAP.md](ROADMAP.md) for detailed integration timeline and migration strategies.**
+
+### Quick Start Recommendation
+
+**Week 1-2**: Use Level 1 (manual capture) to build your knowledge base
+```bash
+# After each spec-kit command
+.agentic/scripts/bash/memory-capture.sh --feature-dir specs/... --type spec --file spec.md
+
+# Search when planning new features
+python3 .agentic/scripts/memory-cli.py search "similar to: new feature idea"
+```
+
+**Week 3-4**: Optionally add Level 2 (automatic hooks) once you see value
+```bash
+# Add to end of .claude/commands/speckit.specify.md
+if [[ -f ".agentic/scripts/bash/memory-capture.sh" ]]; then
+  .agentic/scripts/bash/memory-capture.sh --feature-dir "$FEATURE_DIR" --type spec --file "$SPEC_FILE"
+fi
+```
+
+**Month 2+**: Consider Level 3 (context injection) after accumulating 5+ features
 
 ## Database Schema
 
